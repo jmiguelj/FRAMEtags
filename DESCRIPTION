@@ -1,11 +1,9 @@
 Package: FRAMEtags
 Type: Package
-Title: What the Package Does (Title Case)
+Title: FRAME-tags Analysis Pipeline
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+Author: Miguel Jimenez <mj2547@columbia.edu>
+Maintainer: Miguel Jimenez <mj2547@columbia.edu>
+Description: Simplifies use of openCyto to gate and quantify flowcytometry or microscopy date captured from FRAME-tagged cells.
 Encoding: UTF-8
 LazyData: true
