@@ -1,20 +1,36 @@
-#collapse fcs files for ROC analysis
-
-collapseBy <- readline(prompt="Number of files to collapse (blank = don't collapse): ")
-if (collapseBy == "") {
-	collapseBool <- "FALSE"
-	groupByNum <- NA
-} else {
-	collapseBool <- "TRUE"
-	groupByNum <- collapseBy
-}
-
-eventThreshold <- readline(prompt="Ignore peaks below N events (blank = 20): ")
-if (eventThreshold == "") eventThreshold <- "20"
+#' @import methods
+#' @import flowWorkspace
+#' @import openCyto
+#' @import ggcyto
+#' @import parallel
+#' @import RColorBrewer
+#' @import gtools
+#' @import gridExtra
+#' @import grid
+#' @import methods
+#' @import flowCore
+#' @import ncdfFlow
+#' @import RcppArmadillo
+#' @import BH
+#' @import ggplot2
 
 
 makeGT <- function (CellTagName) {
+  #collapse fcs files for ROC analysis
+  
+  collapseBy <- readline(prompt="Number of files to collapse (blank = don't collapse): ")
+  if (collapseBy == "") {
+    collapseBool <- "FALSE"
+    groupByNum <- NA
+  } else {
+    collapseBool <- "TRUE"
+    groupByNum <- collapseBy
+  }
+  
+  eventThreshold <- readline(prompt="Ignore peaks below N events (blank = 20): ")
+  if (eventThreshold == "") eventThreshold <- "20"
 
+  
 ### automatically make gating template based on CTs in index file
 # function for adding rows to gating template data frame to reduce syntax
 addGtRow <- function(df, alias=NA, pop=NA, parent=NA, dims=NA, gmethod=NA, gargs=NA, collapse=collapseBool, group=groupByNum, ppmethod=NA, ppargs=NA) {

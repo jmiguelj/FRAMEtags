@@ -8,3 +8,20 @@ Description: Simplifies use of openCyto to gate and quantify flowcytometry or mi
 Encoding: UTF-8
 License: TBD
 LazyData: true
+Imports:
+  methods,
+  flowWorkspace,
+  openCyto,
+  ggcyto,
+  parallel,
+  RColorBrewer,
+  gtools,
+  gridExtra,
+  grid,
+  methods,
+  flowCore,
+  ncdfFlow,
+  RcppArmadillo,
+  BH,
+  ggplot2
+RoxygenNote: 6.0.1

@@ -1,3 +1,19 @@
+#' @import methods
+#' @import flowWorkspace
+#' @import openCyto
+#' @import ggcyto
+#' @import parallel
+#' @import RColorBrewer
+#' @import gtools
+#' @import gridExtra
+#' @import grid
+#' @import methods
+#' @import flowCore
+#' @import ncdfFlow
+#' @import RcppArmadillo
+#' @import BH
+#' @import ggplot2
+
 prettyPlotGate <- function(gs, CellTags, population = "nonMaxF") {
 
 if (!exists("template")) template <- list("G.nRange" = c(0.5,4.5), "R.nRange" = c(0.4,4.5))
@@ -8,7 +24,26 @@ nOverlay <- length(overlay)
 #pal <- c(brewer.pal(9,"Set1"), brewer.pal(12,"Set3"))
 #CT color alphabet
 pal <- c(
-"#191919","#f0a3ff","#0075dc","#4c005c","#2bce48","#808080","#ffa405","#ff0010","#5ef1f2","#ff5005","#993f00","#005c31","#ffcc99","#8f7c00","#9dcc00","#c20088","#003380","#ffa8bb","#00998f","#740aff"
+"#191919"
+,"#f0a3ff"
+,"#0075dc"
+,"#4c005c"
+,"#2bce48"
+,"#808080"
+,"#ffa405"
+,"#ff0010"
+,"#5ef1f2"
+,"#ff5005"
+,"#993f00"
+,"#005c31"
+,"#ffcc99"
+,"#8f7c00"
+,"#9dcc00"
+,"#c20088"
+,"#003380"
+,"#ffa8bb"
+,"#00998f"
+,"#740aff"
 )
 overlay.fill <- pal[1:nOverlay]
 names(overlay.fill) <- overlay

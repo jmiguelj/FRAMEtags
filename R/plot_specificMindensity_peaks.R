@@ -1,6 +1,21 @@
 ### plot specificMindensity detailed peaks
-library("gridExtra")
-library("grid")
+#library("gridExtra")
+#library("grid")
+#' @import methods
+#' @import flowWorkspace
+#' @import openCyto
+#' @import ggcyto
+#' @import parallel
+#' @import RColorBrewer
+#' @import gtools
+#' @import gridExtra
+#' @import grid
+#' @import methods
+#' @import flowCore
+#' @import ncdfFlow
+#' @import RcppArmadillo
+#' @import BH
+#' @import ggplot2
 
 specificMindensityPlots <- function(gs, GTindex, whichFlowFrame=1, eventsToPlot=10000) {
 

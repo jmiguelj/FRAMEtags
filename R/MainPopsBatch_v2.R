@@ -1,16 +1,17 @@
 
 #####initialize
-library(flowWorkspace)
-library(openCyto)
-library(ggcyto)
-#library(flowIncubator)  #install from GitHub
-library(parallel)
-library(RColorBrewer)
-library(gtools)
+#library(flowWorkspace)
+#library(openCyto)
+#library(ggcyto)
+#library(parallel)
+#library(RColorBrewer)
+#library(gtools)
+
+getFRAMEtagData <- function() { # added to make script into function
 
 #detect system variables
 numCores <- detectCores()-1
-scriptDir <- dirname(sys.frame(1)$ofile)
+#scriptDir <- dirname(sys.frame(1)$ofile)
 
 # adjust param for plotGate()
 flowWorkspace.par.set("plotGate", list(default.y = "S.A")) # set default Y-axis from "SSC-A" to "S.A"
@@ -39,7 +40,7 @@ GTfile <- list.files(path = inFolder, pattern = "gating_template", full = TRUE) 
 if (length(GTfile)==0) {
 	cat("\nCreating gating template...")
 	#load gating template function, takes vector of CT names and returns gating template as a data frame
-	source(file.path(scriptDir,"makeGT_v4.R"), local=TRUE)
+	#source(file.path(scriptDir,"makeGT_v4.R"), local=TRUE)
 	
 	#extract CT names and corresponding strain identities
 	CellTagName <- CTindex[["CellTag"]]
@@ -69,7 +70,7 @@ if (tolower(colnames(Tubeindex)[1]) == "well") { #tolower input to ignore case
 
 ##### Register Custom Gating Functions and transforms
 #register custom functions: minmaxTransform, specificMindensity, dummySubgate
-source(file.path(scriptDir,"customFunctions_v4.R"), local=TRUE)
+#source(file.path(scriptDir,"customFunctions_v4.R"), local=TRUE)
 
 
 #### detect/create analyzed files log and retrieve only new fcs files
@@ -170,10 +171,10 @@ for (i in 0:((length(fsALL)/setSize))) {
 	cat("\nStarting analysis...\n")
 
 	# load transform function, requires flowset with colnames: G.n, R.n, S.A, F.A
-	source(file.path(scriptDir,"transformGR.R"), local=FALSE)
+	#source(file.path(scriptDir,"transformGR.R"), local=FALSE)
 
 
-	#fsChunk <- transformGR(fsChunk)
+	fs <- transformGR(fs)
 
 
 	##### GATE CT POPULATIONS
@@ -191,7 +192,7 @@ for (i in 0:((length(fsALL)/setSize))) {
 
 	#print gating result
 	cat("\nSaving summary plots...\n")
-	source(file.path(scriptDir,"prettyPlotGate.R"), local=TRUE)
+	#source(file.path(scriptDir,"prettyPlotGate.R"), local=TRUE)
 
 	p <- prettyPlotGate(gs, CTindex$CellTag)
 
@@ -205,7 +206,7 @@ for (i in 0:((length(fsALL)/setSize))) {
 
 	##### OUTPUT DATA FILES
 	cat("\nSaving output files...\n")
-	source(file.path(scriptDir,"countCTs_v2.R"), local=TRUE)
+	#source(file.path(scriptDir,"countCTs_v2.R"), local=TRUE)
 
 	res <- countCTs(gs, CTindex, Tubeindex, well=isWell)
 
@@ -241,7 +242,7 @@ whichToPlot <- readline(prompt="Do you want detailed plots of peaks/gates? Which
 if (whichToPlot != "") {
 	cat("Plotting detailed peaks/gates (will take several minutes) ...\n")
 	#load functions
-	source(file.path(scriptDir,"plot_specificMindensity_peaks.R"), local=TRUE)
+	#source(file.path(scriptDir,"plot_specificMindensity_peaks.R"), local=TRUE)
 	
 	#load csv gating template as data frame
 	GTindex = read.csv(GTfile, stringsAsFactors = FALSE)
@@ -277,4 +278,4 @@ if (whichToPlot != "") {
 
 cat("############################## Finished!\n")
 
-
+}

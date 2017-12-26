@@ -1,5 +1,5 @@
 
-#transformGR <- function(fs, scaleBy=100000, minNormFluor=-1000, ratioRange=10, logicleMin=-0.5) {
+transformGR <- function(fs, scaleBy=100000, minNormFluor=-1000, ratioRange=10, logicleMin=-0.5) {
 scaleBy=100000
 minNormFluor=-1000
 ratioRange=10
@@ -72,6 +72,6 @@ markers <- rep(NA_character_,length(chnls)) # use R's NA character value
 names(markers) <- chnls
 markernames(fs) <- markers
 
-#return(fs)
+return(fs)
 
-#}
+}
