@@ -21,6 +21,8 @@
 #' @import RcppArmadillo
 #' @import BH
 #' @import ggplot2
+#' @export
+
 
 getFRAMEtagData <- function() { # added to make script into function
 
