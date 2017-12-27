@@ -1,5 +1,29 @@
+#' @import methods
+#' @import flowWorkspace
+#' @import openCyto
+#' @import ggcyto
+#' @import parallel
+#' @import RColorBrewer
+#' @import gtools
+#' @import gridExtra
+#' @import grid
+#' @import methods
+#' @import flowCore
+#' @import ncdfFlow
+#' @import RcppArmadillo
+#' @import BH
+#' @import ggplot2
 
 #####CUSTOM TRANSFORMS
+#truncate for extreme negs and inf produced by SSC normalization/scaling to make logicle transform possible
+multiplyTransform <- function(transformationId="multiplyTransform",a=100000)
+{
+  t <- new("transform", .Data=function(x){
+    x*a
+  })
+  t@transformationId <- transformationId
+  t
+}
 #truncate for extreme negs and inf produced by SSC normalization/scaling to make logicle transform possible
 minmaxTransform <- function(transformationId="minmaxTransform",a=1, b=262143)
 {
@@ -229,7 +253,7 @@ find_valleysFull <- function(x, y = NULL, num_valleys = NULL, adjust = 2, ...) {
 	return(my_gate)
     }
 }
-registerPlugins(fun=.specificMindensity,methodName='specificMindensity',dep=NA)
+openCyto::registerPlugins(fun=.specificMindensity,methodName='specificMindensity',dep=NA)
 
 
 #register gating method for when a CellTag is missing and want to gate whole range
@@ -246,6 +270,6 @@ registerPlugins(fun=.specificMindensity,methodName='specificMindensity',dep=NA)
 	my_gate <- openCyto:::.boundary(fr, channels=channels, min=min, max=max,...)
     	return(my_gate)
 }
-registerPlugins(fun=.dummySubgate,methodName='dummySubgate',dep=NA)
+openCyto::registerPlugins(fun=.dummySubgate,methodName='dummySubgate',dep=NA)
 
 

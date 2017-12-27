@@ -6,6 +6,21 @@
 #library(parallel)
 #library(RColorBrewer)
 #library(gtools)
+#' @import methods
+#' @import flowWorkspace
+#' @import openCyto
+#' @import ggcyto
+#' @import parallel
+#' @import RColorBrewer
+#' @import gtools
+#' @import gridExtra
+#' @import grid
+#' @import methods
+#' @import flowCore
+#' @import ncdfFlow
+#' @import RcppArmadillo
+#' @import BH
+#' @import ggplot2
 
 getFRAMEtagData <- function() { # added to make script into function
 
@@ -113,7 +128,7 @@ fs  <- read.flowSet(fcsFilePaths, alter.names=TRUE)
 cat("Done\n\n")
 
 #extract parameter names and display
-channelNames <- colnames(fs)
+channelNames <- colnames(fs) # s4 object slot
 cat("The detected parameters are:", channelNames,sep="\n")
 
 # ask for correct channels
@@ -165,15 +180,18 @@ for (i in 0:((length(fsALL)/setSize))) {
 	if (end > length(fsALL)) end <- (i*setSize) + (length(fsALL)%%setSize)
 
 	fs <- fsALL[start:end]
-
+	#assign("fs", fsALL[start:end], envir = .GlobalEnv)
+	
 	##### TRANSFORM
 	#transform data to add calculated parameters: G.n, R.n, B.n, fTotal and fRatio
 	cat("\nStarting analysis...\n")
 
 	# load transform function, requires flowset with colnames: G.n, R.n, S.A, F.A
 	#source(file.path(scriptDir,"transformGR.R"), local=FALSE)
+	#fs <- transform(fs, G.n = scaleBy*(G/S.A), R.n = scaleBy*(R/S.A))
+	#nanTrunc <- nanTransform(transformationId="nanTrunc", a=-1000)
 
-
+	
 	fs <- transformGR(fs)
 
 

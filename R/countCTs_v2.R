@@ -1,4 +1,18 @@
-
+#' @import methods
+#' @import flowWorkspace
+#' @import openCyto
+#' @import ggcyto
+#' @import parallel
+#' @import RColorBrewer
+#' @import gtools
+#' @import gridExtra
+#' @import grid
+#' @import methods
+#' @import flowCore
+#' @import ncdfFlow
+#' @import RcppArmadillo
+#' @import BH
+#' @import ggplot2
 countCTs <- function(gs, CTindex, Tubeindex, well=FALSE) {
 
 if (!well) {
@@ -15,7 +29,7 @@ if (!well) {
 
 
 pData(gs)$Tube <- as.character(n) 
-pData(gs)$time <- fsApply(fs, function(x){max(exprs(x)[,"Time"]) - min(exprs(x)[,"Time"])})
+pData(gs)$time <- fsApply(getData(gs), function(x){max(exprs(x)[,"Time"]) - min(exprs(x)[,"Time"])})
 
 
 #extract CT pop counts

@@ -1,3 +1,21 @@
+#' @import methods
+#' @import flowWorkspace
+#' @import openCyto
+#' @import ggcyto
+#' @import parallel
+#' @import RColorBrewer
+#' @import gtools
+#' @import gridExtra
+#' @import grid
+#' @import methods
+#' @import flowCore
+#' @import ncdfFlow
+#' @import RcppArmadillo
+#' @import BH
+#' @import ggplot2
+# fs needs to have colnames: G, R, (B), S.A
+# vars minmaxTrunc, multiplyBy, nanTrunc are assigned to global environment, but immediately removed
+# this prevents issue with transforms on flowsets not finding objects when used within closure
 
 transformGR <- function(fs, scaleBy=100000, minNormFluor=-1000, ratioRange=10, logicleMin=-0.5) {
 scaleBy=100000
@@ -14,9 +32,10 @@ logicleMin <- logicleMin #expected minimum value of logicle(G.n,R.n,B.n), only n
 
 # normalize by SSC
 cat("Normalizing by SSC...")
-fs <- transform(fs, G.n = scaleBy*(G/S.A), R.n = scaleBy*(R/S.A)) #, B.n = scaleBy*(B/S.A))
+assign("multiplyBy", multiplyTransform(transformationId="multiplyBy", a=scaleBy), pos = .GlobalEnv)
+fs <- transform(fs, G.n = multiplyBy(G/S.A), R.n = multiplyBy(R/S.A)) #, B.n = scaleBy*(B/S.A))
+remove("multiplyBy", pos = .GlobalEnv)
 
-#fs <- do.call("transform", list(fs, G.n = scaleBy*(G/S.A), R.n = scaleBy*(R/S.A)))
 cat("Done\n")
 
 # extract fluor total and R:G fluor ratio as log
@@ -26,6 +45,9 @@ cat("Done\n")
 
 # clean up min max for better plotting and logicle transform
 p <- parameters(fs[[1]])
+gfpIndex <- which(colnames(fs)=="G")
+rfpIndex <- which(colnames(fs)=="R")
+#bfpIndex <- which(colnames(fs)=="B")
 G.nIndex <- which(colnames(fs)=="G.n")
 R.nIndex <- which(colnames(fs)=="R.n")
 #B.nIndex <- which(colnames(fs)=="B.n")
@@ -45,12 +67,13 @@ L <- length(fs)
 res <- mapply(1:L, FUN = function(x){parameters(fs[[x]]) <- p})
 
 # clean up extreme and NaN values produced by division
-minmaxTrunc <- minmaxTransform(transformationId="minmaxTrunc", a=minNormFluor, b=p[['maxRange']][gfpIndex])
+assign("minmaxTrunc", minmaxTransform(transformationId="minmaxTrunc", a=minNormFluor, b=p[['maxRange']][gfpIndex]), pos = .GlobalEnv)
 fs <- transform(fs, G.n=minmaxTrunc(G.n), R.n=minmaxTrunc(R.n)) #, B.n=minmaxTrunc(B.n))
+remove("minmaxTrunc", pos = .GlobalEnv)
 
-nanTrunc <- nanTransform(transformationId="nanTrunc", a=minNormFluor)
+assign("nanTrunc", nanTransform(transformationId="nanTrunc", a=minNormFluor), envir = .GlobalEnv)
 fs <- transform(fs, G.n=nanTrunc(G.n), R.n=nanTrunc(R.n))
-
+remove("nanTrunc", pos = .GlobalEnv)
 
 # transform with Logicle transform
 cat("Logicle transform of G,R ...")
