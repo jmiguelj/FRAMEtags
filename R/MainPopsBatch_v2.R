@@ -21,6 +21,7 @@
 #' @import RcppArmadillo
 #' @import BH
 #' @import ggplot2
+#' @import flowClust
 #' @export
 
 
