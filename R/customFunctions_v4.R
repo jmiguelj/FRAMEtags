@@ -253,7 +253,7 @@ find_valleysFull <- function(x, y = NULL, num_valleys = NULL, adjust = 2, ...) {
 	return(my_gate)
     }
 }
-openCyto::registerPlugins(fun=.specificMindensity,methodName='specificMindensity',dep=NA)
+
 
 
 #register gating method for when a CellTag is missing and want to gate whole range
@@ -270,6 +270,5 @@ openCyto::registerPlugins(fun=.specificMindensity,methodName='specificMindensity
 	my_gate <- openCyto:::.boundary(fr, channels=channels, min=min, max=max,...)
     	return(my_gate)
 }
-openCyto::registerPlugins(fun=.dummySubgate,methodName='dummySubgate',dep=NA)
 
 
