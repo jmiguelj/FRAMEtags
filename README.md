@@ -3,14 +3,20 @@ This package automatically gates and quantifies flow cytometry or microscopy dat
 
 ***
 # Installation
-1. Download and install R v3.3.3 at https://cloud.r-project.org/
+1. Download and install R v3.3.3 or greater at https://cloud.r-project.org/
   
 2. Open R
   
 3. Paste and execute the following commands to install bioconductor (update packages if necessary)
 ```{r}  
 source("https://bioconductor.org/biocLite.R")
-biocLite(c("openCyto","ggcyto", "devtools", "flowWorkspace", "openCyto", "ggcyto", "flowCore", "flowClust", "ncdfFlow"))
+biocLite(c("openCyto"
+          , "ggcyto"
+          , "devtools"
+          , "flowWorkspace"
+          , "flowCore"
+          , "flowClust"
+          , "ncdfFlow"))
 ```
 
 4. Then the following commands to install FRAMEtags
