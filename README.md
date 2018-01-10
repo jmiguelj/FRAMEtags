@@ -1,7 +1,7 @@
 # FRAMEtags
-Simplifies use of openCyto to gate and quantify flow cytometry or microscopy data captured from FRAME-tagged cells.
+This package automatically gates and quantifies flow cytometry or microscopy data captured from FRAME-tagged cells using openCyto pipeline.
 
-#Installation
+# Installation
 1. Download and install R v3.3.3 at https://cloud.r-project.org/
 
 2. Open R
@@ -11,7 +11,8 @@ biocLite()
 library(devtools)
 install_github("jmiguelj/FRAMEtags")
 
-#Required input files
+
+# Required input files
 (see "sample data" for example input folder/files)
 
 You will need a folder containing the following files
@@ -25,14 +26,14 @@ You will need a folder containing the following files
 (containing a list of the "Tube Name" or "Well IDs" and their corresponding user-specified sample treatment or experimental condition, each row corresponds to one input .fcs file and the "treatment" column is used mainly for labeling output statistics)
 
 
-#How to run
+# How to run
 Into the R command line paste and execute the following command:
 
 getFRAMEtagData()
 
 then follow on screen directions.
 
-#Output files
+# Output files
 In main input folder
 1. "gating_template.csv""
 (can be modified and getFRAMEtagData() rerun to test modifications)
