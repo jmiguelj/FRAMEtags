@@ -10,7 +10,7 @@ This package automatically gates and quantifies flow cytometry or microscopy dat
 3. Paste and execute the following commands to install bioconductor (update packages if necessary)
 ```{r}  
 source("https://bioconductor.org/biocLite.R")
-biocLite("devtools")
+biocLite(c("openCyto","ggcyto", "devtools", "flowWorkspace", "openCyto", "ggcyto", "flowCore", "flowClust", "ncdfFlow"))
 ```
 
 4. Then the following commands to install FRAMEtags
@@ -22,7 +22,7 @@ library("FRAMEtags")
 
 ***
 # Required input files
-(see "sample data" for example input folder/files)
+(see "sample data" for zip fole of example input folder/files)
 
 You will need to prepare a folder on your computer containing the following files:
 
