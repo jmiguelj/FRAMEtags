@@ -17,7 +17,7 @@ biocLite()
 ```{r}  
 library(devtools)
 install_github("jmiguelj/FRAMEtags")
-library("FRAMEtags"")
+library("FRAMEtags")
 ```
 
 ***
