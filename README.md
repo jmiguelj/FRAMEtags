@@ -15,7 +15,8 @@ biocLite()
 
 4. Then the following commands to install FRAMEtags
 ```{r}  
-library(devtools)
+biocLite("devtools")
+library("devtools")
 install_github("jmiguelj/FRAMEtags")
 library("FRAMEtags")
 ```

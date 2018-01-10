@@ -20,6 +20,7 @@ Imports:
   grid,
   methods,
   flowCore,
+  flowClust,
   ncdfFlow,
   RcppArmadillo,
   BH,
