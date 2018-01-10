@@ -46,7 +46,7 @@ dir.create(file.path(inFolder, "output"))
 
 ##### MAKE GATING TEMPLATE
 #detect/ask for FRAME-tag index file
-ftFile <- list.files(path = inFolder, pattern = "Tag-Strain", full = TRUE)
+ftFile <- list.files(path = inFolder, pattern = "Tag-Strain", full = TRUE, ignore.case = TRUE)
 if (length(ftFile)==0) ftFile <- readline(prompt="Enter path of Tag-Strain.csv index file: ")
 FTindex = read.csv(ftFile, stringsAsFactors = FALSE)
 
@@ -54,7 +54,7 @@ FTindex = read.csv(ftFile, stringsAsFactors = FALSE)
 
 
 
-GTfile <- list.files(path = inFolder, pattern = "gating_template", full = TRUE) # need to extract fluor limits into template var for prettyPlotGate
+GTfile <- list.files(path = inFolder, pattern = "gating_template", full = TRUE, ignore.case = TRUE) # need to extract fluor limits into template var for prettyPlotGate
 if (length(GTfile)==0) {
 	cat("\nCreating gating template...")
 	#load gating template function, takes vector of FT names and returns gating template as a data frame
@@ -75,7 +75,7 @@ if (length(GTfile)==0) {
 
 
 #####detect/ask for tube identities file
-tubeFile <- list.files(path = inFolder, pattern = "Tube-Treatment", full = TRUE)
+tubeFile <- list.files(path = inFolder, pattern = "Tube-Treatment", full = TRUE, ignore.case = TRUE)
 if (length(tubeFile)==0) tubeFile <- readline(prompt="Enter path of Tube-Treatment.csv index file: ")
 Tubeindex = read.csv(tubeFile, stringsAsFactors = FALSE)
 if (tolower(colnames(Tubeindex)[1]) == "well") { #tolower input to ignore case
@@ -95,7 +95,7 @@ if (tolower(colnames(Tubeindex)[1]) == "well") { #tolower input to ignore case
 
 
 logName = "files-analyzed_log.csv"
-analyzedFile <- list.files(path = inFolder, pattern = logName, full = TRUE)
+analyzedFile <- list.files(path = inFolder, pattern = logName, full = TRUE, ignore.case = TRUE)
 if (length(analyzedFile) != 0) {
 	analyzedIndex = read.csv(analyzedFile, stringsAsFactors = FALSE)
 } else {
