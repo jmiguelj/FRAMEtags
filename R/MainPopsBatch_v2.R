@@ -39,7 +39,7 @@ options("openCyto" = list(gating = list(minEvents = 5)))
 
 #####retrieve FCS files
 # ask for input folder
-inFolder <- readline(prompt="Enter path of folder FCS files: ")
+inFolder <- readline(prompt="Enter path to input folder with .fcs files: ")
 
 # create folder to output files
 dir.create(file.path(inFolder, "output"))

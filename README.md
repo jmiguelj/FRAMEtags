@@ -24,7 +24,7 @@ library("FRAMEtags")
 # Required input files
 (see "sample data" for example input folder/files)
 
-You will need a folder containing the following files
+You will need to prepare a folder on your computer containing the following files:
 
 1. .fcs files to be analyzed
     + with at least 2 fluorescence, 1 forward scatter and 1 side scatter parameter
