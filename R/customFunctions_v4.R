@@ -14,6 +14,25 @@
 #' @import BH
 #' @import ggplot2
 
+#versions
+# methods 3.3.3
+# flowWorkspace 3.20.5
+# openCyto 1.12.1
+# ggcyto 1.2.2
+# parallel 3.3.3
+# RColorBrewer 1.1-2
+# gtools 3.5.0
+# gridExtra 2.3
+# grid 3.3.3
+# flowCore 1.40.6
+# ncdfFlow 2.20.1
+# RcppArmadillo 0.8.300.1.0
+# BH 1.65.0-1
+# ggplot2 2.2.1
+# flowClust 3.12.2
+#Biocunductor 3.4
+# CytoML 1.0.1
+
 #####CUSTOM TRANSFORMS
 #truncate for extreme negs and inf produced by SSC normalization/scaling to make logicle transform possible
 multiplyTransform <- function(transformationId="multiplyTransform",a=100000)

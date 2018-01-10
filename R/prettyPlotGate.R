@@ -14,15 +14,15 @@
 #' @import BH
 #' @import ggplot2
 
-prettyPlotGate <- function(gs, CellTags, population = "nonMaxF") {
+prettyPlotGate <- function(gs, TagNames, population = "nonMaxF") {
 
 if (!exists("template")) template <- list("G.nRange" = c(0.5,4.5), "R.nRange" = c(0.4,4.5))
 
 
-overlay <- CellTags
+overlay <- TagNames
 nOverlay <- length(overlay)
 #pal <- c(brewer.pal(9,"Set1"), brewer.pal(12,"Set3"))
-#CT color alphabet
+#FT color alphabet
 pal <- c(
 "#191919"
 ,"#f0a3ff"

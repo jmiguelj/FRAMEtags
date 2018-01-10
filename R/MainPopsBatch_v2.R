@@ -45,10 +45,10 @@ inFolder <- readline(prompt="Enter path of folder FCS files: ")
 dir.create(file.path(inFolder, "output"))
 
 ##### MAKE GATING TEMPLATE
-#detect/ask for CellTag index file
-ctFile <- list.files(path = inFolder, pattern = "CellTag-Strain", full = TRUE)
-if (length(ctFile)==0) ctFile <- readline(prompt="Enter path of CellTag-Strain.csv index file: ")
-CTindex = read.csv(ctFile, stringsAsFactors = FALSE)
+#detect/ask for FRAME-tag index file
+ftFile <- list.files(path = inFolder, pattern = "Tag-Strain", full = TRUE)
+if (length(ftFile)==0) ftFile <- readline(prompt="Enter path of Tag-Strain.csv index file: ")
+FTindex = read.csv(ftFile, stringsAsFactors = FALSE)
 
 
 
@@ -57,13 +57,13 @@ CTindex = read.csv(ctFile, stringsAsFactors = FALSE)
 GTfile <- list.files(path = inFolder, pattern = "gating_template", full = TRUE) # need to extract fluor limits into template var for prettyPlotGate
 if (length(GTfile)==0) {
 	cat("\nCreating gating template...")
-	#load gating template function, takes vector of CT names and returns gating template as a data frame
+	#load gating template function, takes vector of FT names and returns gating template as a data frame
 	#source(file.path(scriptDir,"makeGT_v4.R"), local=TRUE)
 	
-	#extract CT names and corresponding strain identities
-	CellTagName <- CTindex[["CellTag"]]
+	#extract FT names and corresponding strain identities
+	TagName <- FTindex[["Tag"]]
 
-	template <- makeGT(CellTagName) #create gating template dataframe
+	template <- makeGT(TagName) #create gating template dataframe
 	df <- template$gt
 
 	# make cvs from df
@@ -80,10 +80,10 @@ if (length(tubeFile)==0) tubeFile <- readline(prompt="Enter path of Tube-Treatme
 Tubeindex = read.csv(tubeFile, stringsAsFactors = FALSE)
 if (tolower(colnames(Tubeindex)[1]) == "well") { #tolower input to ignore case
 	isWell <- TRUE
-	colnames(Tubeindex)[1] <- "Tube" # Relabel this precise case-sensitive label used in countCTs
+	colnames(Tubeindex)[1] <- "Tube" # Relabel this precise case-sensitive label used in countFTs
 } else {
 	isWell <- FALSE
-	colnames(Tubeindex)[1] <- "Tube" # Relabel this precise case-sensitive label used in countCTs
+	colnames(Tubeindex)[1] <- "Tube" # Relabel this precise case-sensitive label used in countFTs
 }
 
 ##### Register Custom Gating Functions and transforms
@@ -198,7 +198,7 @@ for (i in 0:((length(fsALL)/setSize))) {
 	fs <- transformGR(fs)
 
 
-	##### GATE CT POPULATIONS
+	##### GATE FT POPULATIONS
 	gt <- gatingTemplate(GTfile, autostart = 1L)
 	gs <- GatingSet(fs)
 	#err <- try(gating(gt, gs, parallel_type="multicore",mc.cores=numCores), silent = T)
@@ -215,9 +215,9 @@ for (i in 0:((length(fsALL)/setSize))) {
 	cat("\nSaving summary plots...\n")
 	#source(file.path(scriptDir,"prettyPlotGate.R"), local=TRUE)
 
-	p <- prettyPlotGate(gs, CTindex$CellTag)
+	p <- prettyPlotGate(gs, FTindex$Tag)
 
-	outGates <- paste((prevBatch+i+1), "_CT-gates.png", sep="")
+	outGates <- paste((prevBatch+i+1), "_FT-gates.png", sep="")
 
 	png(filename=file.path(inFolder, "output", outGates)
 		, width = 2048, height = 2048)
@@ -227,9 +227,9 @@ for (i in 0:((length(fsALL)/setSize))) {
 
 	##### OUTPUT DATA FILES
 	cat("\nSaving output files...\n")
-	#source(file.path(scriptDir,"countCTs_v2.R"), local=TRUE)
+	#source(file.path(scriptDir,"countFTs_v2.R"), local=TRUE)
 
-	res <- countCTs(gs, CTindex, Tubeindex, well=isWell)
+	res <- countFTs(gs, FTindex, Tubeindex, well=isWell)
 
 	outStats <- paste((prevBatch+i+1), "_full-stats.csv", sep="")
 	outCounts <- paste((prevBatch+i+1), "_counts.csv", sep="")

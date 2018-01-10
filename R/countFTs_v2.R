@@ -13,7 +13,7 @@
 #' @import RcppArmadillo
 #' @import BH
 #' @import ggplot2
-countCTs <- function(gs, CTindex, Tubeindex, well=FALSE) {
+countFTs <- function(gs, FTindex, Tubeindex, well=FALSE) {
 
 if (!well) {
 	#extract tube number
@@ -32,43 +32,43 @@ pData(gs)$Tube <- as.character(n)
 pData(gs)$time <- fsApply(getData(gs), function(x){max(exprs(x)[,"Time"]) - min(exprs(x)[,"Time"])})
 
 
-#extract CT pop counts
+#extract FT pop counts
 s <- getPopStats(gs, statistic="count", format="wide")
-CTcounts <- s[rownames(s) %in% CTindex$CellTag, , drop=F]
-colnames(CTcounts) <- pData(gs)$Tube
+FTcounts <- s[rownames(s) %in% FTindex$Tag, , drop=F]
+colnames(FTcounts) <- pData(gs)$Tube
 
 
-#find matching names in CTindex and Tubeindex, relabel CTcounts and s if found
+#find matching names in FTindex and Tubeindex, relabel FTcounts and s if found
 
-CTcountsRowNames <- sapply(rownames(CTcounts), function(X) {
-					index <- which(CTindex[,"CellTag"] == X)
-					if (length(index) == 1) { CTindex[index, "Strain"]
+FTcountsRowNames <- sapply(rownames(FTcounts), function(X) {
+					index <- which(FTindex[,"Tag"] == X)
+					if (length(index) == 1) { FTindex[index, "Strain"]
 					} else { X }
 				})
 
-CTcountsColNames <- sapply(colnames(CTcounts), function(X) {
+FTcountsColNames <- sapply(colnames(FTcounts), function(X) {
 					index <- which(Tubeindex[,"Tube"] == X)
 					if (length(index) == 1) { Tubeindex[index, "Treatment"]
 					} else { X }
 				})
 
 
-rownames(CTcounts) <- CTcountsRowNames
-colnames(CTcounts) <- CTcountsColNames
+rownames(FTcounts) <- FTcountsRowNames
+colnames(FTcounts) <- FTcountsColNames
 
 
 #reorder alphabetically
-CTcounts <- CTcounts[order(rownames(CTcounts)), order(colnames(CTcounts)), drop=F]
+FTcounts <- FTcounts[order(rownames(FTcounts)), order(colnames(FTcounts)), drop=F]
 s <- s[, order(colnames(s)), drop=F]
 
 parents <- s[rownames(s) == "nonMaxF", , drop=F]
 
-CTpercent <- t(t(CTcounts)/colSums(CTcounts))
+FTpercent <- t(t(FTcounts)/colSums(FTcounts))
 
 
-CTcounts <- rbind(CTcounts, parents)
+FTcounts <- rbind(FTcounts, parents)
 
-res <- list("fullStats" = s, "counts" = CTcounts, "percents" = CTpercent, "pData" = pData(gs))
+res <- list("fullStats" = s, "counts" = FTcounts, "percents" = FTpercent, "pData" = pData(gs))
 
 return(res)
 }
