@@ -7,7 +7,7 @@ This package automatically gates and quantifies flow cytometry or microscopy dat
   
 2. Open R
   
-3. Paste and execute the following commands to install bioconductor (update packages if necessary)
+3. Paste and execute the following commands to install required packages from bioconductor (update packages if necessary)
 ```{r}  
 source("https://bioconductor.org/biocLite.R")
 biocLite(c("openCyto"
@@ -28,9 +28,9 @@ library("FRAMEtags")
 
 ***
 # Required input files
-(see "sample data" for zip fole of example input folder/files)
+(You can download sample data zip file with required input folder/files here: https://github.com/jmiguelj/FT-data/raw/master/FT%20data.zip)
 
-You will need to prepare a folder on your computer containing the following files:
+In general, you need to prepare a folder on your computer containing the following files:
 
 1. .fcs files to be analyzed
     + with at least 2 fluorescence, 1 forward scatter and 1 side scatter parameter
