@@ -67,8 +67,8 @@ In main input folder you should see:
 
     i. "counts.csv"; final event counts for each FT and total parent population "nonMaxF"
   
-    ii. "FT-gate.png"; visual overview of final FT gates for each .fcs
-        + use this to determine any potential anomalous gating
+    ii. "FT-gate.png"; visual overview of final FT gates for each .fcs  
+      + use this to determine any potential anomalous gating  
   
 
     iii. "full-stats.csv"; event counts for every gate leading to and including the final FT gates
