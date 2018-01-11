@@ -216,7 +216,7 @@ for (i in 0:((length(fsALL)/setSize))) {
 	#}
 
 	#print gating result
-	cat("\nSaving summary plots...\n")
+	cat("\nSaving summary plots... (may take some time)\n")
 	#source(file.path(scriptDir,"prettyPlotGate.R"), local=TRUE)
 
 	p <- prettyPlotGate(gs, FTindex$Tag)
@@ -284,7 +284,7 @@ if (whichToPlot != "") {
 
 		plots <- specificMindensityPlots(gs, GTindex, whichFlowFrame=k, eventsToPlot=10000)
 
-		cat("Saving plots...\n")
+		cat("Saving plots... (may take some time)\n")
 		for (j in 1:length(plots)) {
 			
 			outPlotName <- paste(outPlotBaseName, names(plots)[j], ".png", sep="")
