@@ -7,7 +7,7 @@ This package automatically gates and quantifies flow cytometry or microscopy dat
   
 2. Open R
   
-3. Paste and execute the following commands to install bioconductor (update packages if necessary)
+3. Paste and execute the following commands to install bioconductor (update packages if necessary, but not "pcaPP")
 ```{r}  
 source("https://bioconductor.org/biocLite.R")
 biocLite(c("openCyto"
@@ -16,7 +16,8 @@ biocLite(c("openCyto"
           , "flowWorkspace"
           , "flowCore"
           , "flowClust"
-          , "ncdfFlow"))
+          , "ncdfFlow"
+          , "DBI"))
 ```
 
 4. Then the following commands to install FRAMEtags

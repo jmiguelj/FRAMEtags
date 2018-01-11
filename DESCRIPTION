@@ -6,10 +6,9 @@ Author: Miguel Jimenez <mj2547@columbia.edu>
 Maintainer: Miguel Jimenez <mj2547@columbia.edu>
 Description: Simplifies use of openCyto to gate and quantify flowcytometry or microscopy date captured from FRAME-tagged cells.
 Encoding: UTF-8
-License: TBD
+License: GPL-3
 LazyData: true
 Imports:
-  methods,
   flowWorkspace,
   openCyto,
   ggcyto,
