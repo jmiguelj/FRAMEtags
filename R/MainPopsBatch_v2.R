@@ -28,7 +28,11 @@
 getFRAMEtagData <- function() { # added to make script into function
 
 #detect system variables
-numCores <- detectCores()-1
+if(.Platform$OS.type == "unix") {
+  numCores <- detectCores()-1
+} else {
+  numCores <- 1
+}
 #scriptDir <- dirname(sys.frame(1)$ofile)
 
 # adjust param for plotGate()
